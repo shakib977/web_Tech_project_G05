@@ -142,31 +142,47 @@ function initOptions() {
 
 // ── LEADERBOARD via AJAX (Member 1 — Student) ──
 function loadLeaderboard(quizId, containerId) {
-    const box = document.getElementById(containerId);
-    if (!box) return;
+    var box = document.getElementById(containerId);
+    if (!box || !quizId) return;
     box.innerHTML = '<div class="flex-center" style="padding:24px"><div class="spinner"></div></div>';
 
-    doAjax('api/leaderboard.php?quiz_id=' + encodeURIComponent(quizId), null, (err, data) => {
+    doAjax('api/leaderboard.php?quiz_id=' + encodeURIComponent(quizId), null,
+    function(err, data) {
         if (err || !data || !data.success) {
-            box.innerHTML = '<p class="text-center text-muted" style="padding:20px">Could not load leaderboard.</p>';
+            box.innerHTML = '<p class="text-center text-muted text-sm" style="padding:20px">Could not load leaderboard.</p>';
             return;
         }
-        if (data.data.length === 0) {
-            box.innerHTML = '<p class="text-center text-muted" style="padding:20px">No attempts yet.</p>';
+        if (!data.data || data.data.length === 0) {
+            box.innerHTML = '<p class="text-center text-muted text-sm" style="padding:20px">No attempts yet for this quiz.</p>';
             return;
         }
-        let html = '';
-        data.data.forEach((r, i) => {
-            const cls = i < 3 ? 'rank-' + (i + 1) : 'rank-n';
-            html += `<div class="lb-item">
-                <div class="lb-rank ${cls}">${i + 1}</div>
-                <div style="flex:1">
-                    <div class="fw-600" style="font-size:14px">${escHtml(r.name)}</div>
-                    <div class="text-xs text-muted">${escHtml(r.program || '')}</div>
-                </div>
-                <div class="fw-bold text-primary">${r.score}</div>
-            </div>`;
+
+        var rankColors = ['#FEF3C7:#92400E','#F3F4F6:#374151','#FED7AA:#B45309','transparent:var(--gray)','transparent:var(--gray)'];
+        var medals     = ['🥇','🥈','🥉','4','5'];
+        var html       = '';
+
+        data.data.forEach(function(r, i) {
+            var rc = (rankColors[i] || 'transparent:var(--gray)').split(':');
+            
+
+            html += '<div style="display:flex;align-items:center;gap:14px;' +
+                    'padding:13px 20px;border-bottom:1px solid var(--border)">' +
+
+                    '<div style="width:34px;height:34px;border-radius:50%;' +
+                    'background:' + rc[0] + ';display:flex;align-items:center;' +
+                    'justify-content:center;font-size:16px;flex-shrink:0">' +
+                    medals[i] + '</div>' +
+
+                    '<div style="flex:1;min-width:0">' +
+                    '<div style="font-weight:600;font-size:14px">' + escHtml(r.name) + '</div>' +
+                    '<div style="font-size:11px;color:var(--gray-light)">' +
+                    escHtml(r.student_id || '') + '</div></div>' +
+
+                    
+                    
+                    '</div></div>';
         });
+
         box.innerHTML = html;
     }, 'GET');
 }

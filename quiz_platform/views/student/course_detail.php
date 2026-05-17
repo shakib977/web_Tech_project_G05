@@ -49,72 +49,97 @@ require 'views/layout/header.php';
     <!-- LEFT COLUMN -->
     <div>
 
-        <!-- Graded Quizzes (unattempted only) -->
-        <div class="card" style="margin-bottom:20px">
-            <div class="card-header">
-                <span class="card-title">📝 Available Quizzes</span>
-                <span class="badge badge-info"><?= count($quizzes) ?></span>
-            </div>
-            <div class="card-body" style="padding:0">
-                <?php if (empty($quizzes)): ?>
-                <div class="empty-state" style="padding:30px">
-                    <div class="empty-icon">✅</div>
-                    <p class="fw-600">All caught up!</p>
-                    <p class="text-sm text-muted">
-                        No pending graded quizzes. Check attempt history for your results.
-                    </p>
-                    <a href="index.php?page=student&action=attempt_history"
-                       class="btn btn-outline btn-sm" style="margin-top:8px">
-                        📋 View My Attempts
-                    </a>
-                </div>
-                <?php else: ?>
-                <?php foreach ($quizzes as $q): ?>
-                <?php
-                    $now   = time();
-                    $from  = $q['available_from']  ? strtotime($q['available_from'])  : 0;
-                    $until = $q['available_until'] ? strtotime($q['available_until']) : PHP_INT_MAX;
-                    $available = (!$from || $now >= $from) && ($now <= $until);
-                ?>
-                <div style="padding:16px 20px;border-bottom:1px solid var(--border)">
-                    <div class="flex-between" style="margin-bottom:8px">
-                        <div>
-                            <div class="fw-bold" style="font-size:14px">
-                                <?= htmlspecialchars($q['title']) ?>
-                            </div>
-                            <div class="text-xs text-muted" style="margin-top:3px;display:flex;gap:12px">
-                                <span>⏱ <?= $q['time_limit_minutes'] ?>min</span>
-                                <span>📊 <?= $q['total_marks'] ?> marks</span>
-                                <span>🎯 Pass: <?= $q['pass_mark'] ?></span>
-                            </div>
-                        </div>
-                        <div>
-                            <?php if ($available): ?>
-                            <!-- Custom popup before starting -->
-                            <button class="btn btn-primary btn-sm"
-                                    onclick="askStartQuiz(
-                                        <?= $q['id'] ?>,
-                                        '<?= htmlspecialchars(addslashes($q['title'])) ?>',
-                                        <?= $q['time_limit_minutes'] ?>,
-                                        <?= $q['total_marks'] ?>
-                                    )">
-                                🚀 Start Quiz
-                            </button>
-                            <?php elseif ($from && $now < $from): ?>
-                            <span class="text-xs" style="color:var(--warning);font-weight:600">
-                                🕐 Opens <?= date('M d H:i', $from) ?>
-                            </span>
-                            <?php else: ?>
-                            <span class="badge badge-danger">Closed</span>
+        <!-- available Quizzes (unattempted only) -->
+<div class="card" style="margin-bottom:20px">
+    <div class="card-header">
+        <span class="card-title">📝 Quizzes</span>
+        <span class="badge badge-info"><?= count($quizzes) ?></span>
+    </div>
+    <div class="card-body" style="padding:0">
+        <?php if (empty($quizzes)): ?>
+        <div class="empty-state" style="padding:30px">
+            <div class="empty-icon">✅</div>
+            <p class="fw-600">All graded quizzes completed!</p>
+            <p class="text-sm text-muted">No pending quizzes right now.</p>
+        </div>
+        <?php else: ?>
+        <?php foreach ($quizzes as $q): ?>
+        <?php
+            $now         = time();
+            $from        = $q['available_from']  ? strtotime($q['available_from'])  : 0;
+            $until       = $q['available_until'] ? strtotime($q['available_until']) : 0;
+            $is_practice = ($q['quiz_type'] === 'practice');
+            $is_closed   = ($until && $now > $until); // only hide if deadline passed
+        ?>
+        <div style="padding:16px 20px;border-bottom:1px solid var(--border);
+                    border-left:3px solid <?= $is_practice?'var(--secondary)':'var(--primary)' ?>">
+            <div style="display:flex;align-items:flex-start;
+                        justify-content:space-between;gap:12px;flex-wrap:wrap">
+                <div style="flex:1">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                        <span class="badge badge-<?= $is_practice?'purple':'info' ?>"
+                              style="font-size:11px">
+                            <?= $is_practice ? '📝 Practice' : '📊 Graded' ?>
+                        </span>
+                        <?php if ($is_practice && $q['attempt_count'] > 0): ?>
+                        <span class="text-xs text-muted">
+                            <?= $q['attempt_count'] ?> attempt<?= $q['attempt_count']!=1?'s':'' ?>
+                            <?php if ($q['best_score'] !== null): ?>
+                            · Best: <?= round($q['best_score']) ?>/<?= $q['total_marks'] ?>
                             <?php endif; ?>
-                        </div>
+                        </span>
+                        <?php endif; ?>
                     </div>
+                    <div class="fw-bold" style="font-size:14px;margin-bottom:4px">
+                        <?= htmlspecialchars($q['title']) ?>
+                    </div>
+                    <div class="text-xs text-muted"
+                         style="display:flex;gap:14px;flex-wrap:wrap">
+                        <span>⏱ <?= $q['time_limit_minutes'] ?>min</span>
+                        <span>📊 <?= $q['total_marks'] ?> marks</span>
+                        <?php if (!$is_practice): ?>
+                        <span>🎯 Pass: <?= $q['pass_mark'] ?></span>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Time window note (info only, does NOT block button) -->
+                    <?php if ($from && $now < $from): ?>
+                    <div style="margin-top:6px;font-size:12px;color:var(--warning);font-weight:600">
+                        🕐 Scheduled from <?= date('M d, Y H:i', $from) ?>
+                        — you may attempt early
+                    </div>
+                    <?php endif; ?>
+                    <?php if ($until && !$is_closed): ?>
+                    <div style="margin-top:4px;font-size:12px;color:var(--gray)">
+                        ⏰ Closes <?= date('M d, Y H:i', $until) ?>
+                    </div>
+                    <?php endif; ?>
                 </div>
-                <?php endforeach; ?>
-                <?php endif; ?>
+
+                <div style="flex-shrink:0">
+                    <?php if ($is_closed): ?>
+                        <span class="badge badge-danger">🔒 Closed</span>
+                    <?php else: ?>
+                        <!-- ALWAYS show button for published quizzes -->
+                        <button class="btn btn-sm <?= $is_practice?'':'btn-primary' ?>"
+                                style="<?= $is_practice?'background:var(--secondary);color:white':'' ?>"
+                                onclick="askStartQuiz(
+                                    <?= $q['id'] ?>,
+                                    '<?= htmlspecialchars(addslashes($q['title'])) ?>',
+                                    <?= $q['time_limit_minutes'] ?>,
+                                    <?= $q['total_marks'] ?>,
+                                    '<?= $q['quiz_type'] ?>'
+                                )">
+                            <?= $is_practice ? '📝 Practice' : '🚀 Start Quiz' ?>
+                        </button>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
-
+        <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+</div>
         <!-- Course Materials -->
         <div class="card">
             <div class="card-header"><span class="card-title">📁 Materials</span></div>
@@ -149,33 +174,31 @@ require 'views/layout/header.php';
     <!-- RIGHT COLUMN -->
     <div>
 
-        <!-- Leaderboard AJAX -->
-        <?php if (!empty($quizzes)): ?>
-        <div class="card" style="margin-bottom:20px">
-            <div class="card-header">
-                <span class="card-title">🏆 Leaderboard</span>
-                <span class="badge badge-info" style="font-size:11px">AJAX</span>
-            </div>
-            <div class="card-body" style="padding:0">
-                <div style="padding:14px 20px;border-bottom:1px solid var(--border)">
-                    <select class="form-control"
-                            onchange="loadLeaderboard(this.value,'lb_container')">
-                        <option value="">Select a quiz to view rankings...</option>
-                        <?php foreach ($quizzes as $q): ?>
-                        <option value="<?= $q['id'] ?>">
-                            <?= htmlspecialchars($q['title']) ?>
-                        </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div id="lb_container">
-                    <p class="text-center text-muted text-sm" style="padding:24px">
-                        Select a quiz above.
-                    </p>
-                </div>
-            </div>
+       <!-- Leaderboard AJAX — uses ALL published quizzes -->
+<div class="card" style="margin-bottom:20px">
+    <div class="card-header">
+        <span class="card-title">🏆 Leaderboard</span>
+        <span class="badge badge-info" style="font-size:11px">AJAX</span>
+    </div>
+    <div class="card-body" style="padding:0">
+        <div style="padding:14px 20px;border-bottom:1px solid var(--border)">
+            <select class="form-control"
+                    onchange="loadLeaderboard(this.value,'lb_container')">
+                <option value="">Select a quiz to view top 5 scorers...</option>
+                <?php foreach ($all_quizzes as $q): ?>
+                <option value="<?= $q['id'] ?>">
+                    <?= $q['quiz_type']==='practice'?'[Practice] ':'' ?><?= htmlspecialchars($q['title']) ?>
+                </option>
+                <?php endforeach; ?>
+            </select>
         </div>
-        <?php endif; ?>
+        <div id="lb_container">
+            <p class="text-center text-muted text-sm" style="padding:24px">
+                Select a quiz above.
+            </p>
+        </div>
+    </div>
+</div>
 
         <!-- Announcements -->
         <div class="card" style="margin-bottom:20px">
