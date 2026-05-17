@@ -162,23 +162,46 @@ class StudentController {
         $stmt->bind_param('i', $course_id); $stmt->execute();
         $ta = $stmt->get_result()->fetch_assoc(); $stmt->close();
 
-        // Published quizzes
+        // Shows: ALL practice quizzes + graded quizzes not yet completed
 $stmt = $this->conn->prepare(
-    "SELECT q.*, q.time_limit_minutes, q.total_marks, q.pass_mark
+    "SELECT q.*,
+            (SELECT COUNT(*) FROM attempts a
+             WHERE a.quiz_id=q.id AND a.student_id=? AND a.completed_at IS NOT NULL
+            ) AS attempt_count,
+            (SELECT MAX(a.score) FROM attempts a
+             WHERE a.quiz_id=q.id AND a.student_id=? AND a.completed_at IS NOT NULL
+            ) AS best_score
      FROM quizzes q
-     WHERE q.course_id=?
-       AND q.status='published'
-       AND q.quiz_type='graded'
-       AND NOT EXISTS (
-           SELECT 1 FROM attempts a
-           WHERE a.quiz_id=q.id
-             AND a.student_id=?
-             AND a.completed_at IS NOT NULL
+     WHERE q.course_id=? AND q.status='published'
+       AND (
+           q.quiz_type = 'practice'
+           OR (
+               q.quiz_type = 'graded'
+               AND NOT EXISTS (
+                   SELECT 1 FROM attempts a
+                   WHERE a.quiz_id=q.id
+                     AND a.student_id=?
+                     AND a.completed_at IS NOT NULL
+               )
+           )
        )
-     ORDER BY q.available_from, q.id"
+     ORDER BY q.quiz_type DESC, q.available_from, q.id"
 );
-$stmt->bind_param('ii', $course_id, $uid); $stmt->execute();
-$quizzes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC); $stmt->close();
+$stmt->bind_param('iiii', $uid, $uid, $course_id, $uid);
+$stmt->execute();
+$quizzes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
+
+// Separate: ALL published quizzes for leaderboard dropdown
+$stmt = $this->conn->prepare(
+    "SELECT id, title, quiz_type FROM quizzes
+     WHERE course_id=? AND status='published'
+     ORDER BY quiz_type DESC, title"
+);
+$stmt->bind_param('i', $course_id);
+$stmt->execute();
+$all_quizzes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
 
         // Announcements
         $stmt = $this->conn->prepare(
