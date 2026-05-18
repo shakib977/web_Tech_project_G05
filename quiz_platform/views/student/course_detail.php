@@ -250,7 +250,7 @@ require 'views/layout/header.php';
 function askStartQuiz(quizId, title, timeLimit, totalMarks) {
     cconfirmShow({
         icon:    '🚀',
-        title:   'Start Quiz',
+        title:   'Start Quiz ',
         msg:     '"' + title + '"\n\nTime limit: ' + timeLimit + ' minutes\nTotal marks: ' + totalMarks + '\n\nThe timer will start immediately. Make sure you are ready!',
         okText:  'Start Now',
         okClass: 'btn-primary',
