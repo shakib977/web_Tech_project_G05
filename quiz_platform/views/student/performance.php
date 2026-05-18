@@ -15,13 +15,13 @@ $pass_rate = $overall['total'] > 0
            : 0;
 ?>
 
-<!-- Top Stats -->
+<!-- Top Stats --> 
 <div class="stats-grid">
     <div class="stat-card">
         <div class="stat-icon icon-blue">✏️</div>
         <div class="stat-info"><h3><?= $overall['total'] ?></h3><p>Total Attempts</p></div>
     </div>
-    <div class="stat-card">
+    <div class="stat-card"> 
         <div class="stat-icon icon-green">📊</div>
         <div class="stat-info">
             <h3><?= $overall['avg_pct'] ?? 0 ?>%</h3>
@@ -37,27 +37,27 @@ $pass_rate = $overall['total'] > 0
         <div class="stat-info"><h3><?= $pass_rate ?>%</h3><p>Pass Rate</p></div>
     </div>
 </div>
-
+ 
 <div class="grid-2">
 
     <!-- Top Quiz Scores -->
     <div class="card">
         <div class="card-header">
             <span class="card-title">🏆 Top Quiz Scores</span>
-            <span class="text-xs text-muted">Best score per quiz</span>
+            <span class="text-xs text-muted">Best score per quiz</span> 
         </div>
         <div class="card-body" style="padding:0">
             <?php if (empty($top_scores)): ?>
             <div class="empty-state" style="padding:40px">
-                <div class="empty-icon">🏆</div>
+                <div class="empty-icon">🏆</div> 
                 <p>No quiz attempts yet.</p>
             </div>
             <?php else: ?>
             <?php foreach ($top_scores as $i => $s): ?>
             <?php [$grade, $gc] = getGrade($s['score_pct']); ?>
             <div style="display:flex;align-items:center;gap:14px;
-                        padding:13px 20px;border-bottom:1px solid var(--border)">
-                <!-- Rank -->
+                        padding:13px 20px;border-bottom:1px solid var(--border)"> 
+                <!-- Rank --> 
                 <div style="width:28px;height:28px;border-radius:50%;
                             background:<?= $i===0?'#FEF3C7':($i===1?'#F3F4F6':($i===2?'#FEF3C7':'var(--light-2)')) ?>;
                             display:flex;align-items:center;justify-content:center;
