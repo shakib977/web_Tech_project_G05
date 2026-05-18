@@ -13,7 +13,7 @@ $pic_url = file_exists('uploads/profiles/' . $user['profile_pic']) ? BASE_URL . 
         <?php if ($pic_url): ?>
             <img src="<?= $pic_url ?>" id="pic_preview" class="profile-avatar" alt="">
         <?php else: ?>
-            <div class="profile-avatar" id="pic_preview"><?= strtoupper(substr($user['name'],0,1)) ?></div>
+            <div class="profile-avatar" id="pic_preview"><?= strtoupper(substr($user['name'],0,1)) ?></div> 
         <?php endif; ?>
     </div>
     <div class="profile-info">
@@ -43,19 +43,19 @@ $pic_url = file_exists('uploads/profiles/' . $user['profile_pic']) ? BASE_URL . 
                     <input type="text" name="program" class="form-control" value="<?= htmlspecialchars($user['program']) ?>">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Student ID</label>
+                    <label class="form-label">Student ID</label> 
                     <input type="text" class="form-control" value="<?= htmlspecialchars($user['student_id']) ?>" disabled>
                     <p class="form-text">Student ID cannot be changed. Contact admin if needed.</p>
                 </div>
                 <button type="submit" class="btn btn-primary">Save Changes</button>
             </form>
         </div>
-    </div>
+    </div> 
 
     <!-- Right Column -->
     <div>
         <!-- Profile Picture -->
-        <div class="card">
+        <div class="card"> 
             <div class="card-header"><span class="card-title">📷 Profile Picture</span></div>
             <div class="card-body">
                 <form method="POST" action="index.php?page=student&action=profile" enctype="multipart/form-data">
@@ -66,7 +66,7 @@ $pic_url = file_exists('uploads/profiles/' . $user['profile_pic']) ? BASE_URL . 
                         <p class="form-text">JPG, PNG, GIF or WebP. Max 2MB.</p>
                     </div>
                     <button type="submit" class="btn btn-primary">Upload Photo</button>
-                </form>
+                </form> 
             </div>
         </div>
 

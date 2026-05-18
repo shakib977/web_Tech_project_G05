@@ -14,22 +14,22 @@ require 'views/layout/header.php';
     </div>
     <div class="stat-card">
         <div class="stat-icon icon-green">✏️</div>
-        <div class="stat-info"><h3><?= $total_attempts ?></h3><p>Quizzes Taken</p></div>
+        <div class="stat-info"><h3><?= $total_attempts ?></h3><p>Quizzes attempts</p></div> 
     </div>
     <div class="stat-card">
-        <div class="stat-icon icon-yellow">⭐</div>
+        <div class="stat-icon icon-yellow">⭐</div> 
         <div class="stat-info"><h3><?= round($avg_score, 1) ?></h3><p>Average Score</p></div>
     </div>
     <div class="stat-card">
-        <div class="stat-icon icon-purple">🏆</div>
-        <div class="stat-info"><h3><?= $passed ?></h3><p>Quizzes Passed</p></div>
+        <div class="stat-icon icon-purple">🏆</div> 
+        <div class="stat-info"><h3><?= $passed ?></h3><p>Quizzes Passed</p></div >
     </div>
 </div>
 
 <div class="grid-2">
-    <!-- My Courses -->
+    <!-- My Courses --> 
     <div class="card">
-        <div class="card-header">
+        <div class="card-header"> 
             <span class="card-title">📚 My Courses</span>
             <a href="index.php?page=student&action=browse_courses" class="btn btn-outline btn-sm">Browse More</a>
         </div>
@@ -60,7 +60,7 @@ require 'views/layout/header.php';
     <!-- Recent Attempts -->
     <div class="card">
         <div class="card-header">
-            <span class="card-title">🕒 Recent Attempts</span>
+            <span class="card-title">🕒 recent Attempts</span>
             <a href="index.php?page=student&action=attempt_history" class="btn btn-outline btn-sm">View All</a>
         </div>
         <div class="card-body" style="padding:0">

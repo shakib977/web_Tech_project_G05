@@ -226,48 +226,48 @@ tbody tr:hover { background: var(--light); }
 /* ── BADGES ── */
 .badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
 .badge-success{ background: #D1FAE5; color: #065F46; }
-.badge-danger { background: #FEE2E2; color: #991B1B; }
+.badge-danger { background: #FEE2E2; color: #991B1B; } 
 .badge-warning{ background: #FEF3C7; color: #92400E; }
-.badge-info   { background: #DBEAFE; color: #1E40AF; }
+.badge-info   { background: #DBEAFE; color: #1E40AF; } 
 .badge-gray   { background: #F3F4F6; color: #374151; }
 .badge-purple { background: #EDE9FE; color: #5B21B6; }
 
 /* ── ALERTS ── */
-.alert { padding: 13px 18px; border-radius: var(--radius-sm); font-size: 14px; margin-bottom: 18px; display: flex; align-items: flex-start; gap: 10px; }
-.alert-success{ background: #D1FAE5; color: #065F46; border-left: 4px solid var(--success); }
+.alert { padding: 13px 18px; border-radius: var(--radius-sm); font-size: 14px; margin-bottom: 18px; display: flex; align-items: flex-start; gap: 10px; } 
+.alert-success{ background: #D1FAE5; color: #065F46; border-left: 4px solid var(--success); }  
 .alert-danger { background: #FEE2E2; color: #991B1B; border-left: 4px solid var(--danger); }
-.alert-warning{ background: #FEF3C7; color: #92400E; border-left: 4px solid var(--warning); }
-.alert-info   { background: #DBEAFE; color: #1E40AF; border-left: 4px solid var(--info); }
-
-/* ── COURSE CARDS ── */
-.course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-.course-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; transition: var(--transition); box-shadow: var(--shadow); }
-.course-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-.course-card-banner { background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 24px 20px; }
-.course-card-banner h3 { color: white; font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-.course-card-banner p  { color: rgba(255,255,255,.75); font-size: 13px; }
+.alert-warning{ background: #FEF3C7; color: #92400E; border-left: 4px solid var(--warning); } 
+.alert-info   { background: #DBEAFE; color: #1E40AF; border-left: 4px solid var(--info); } 
+  
+/* ── COURSE CARDS ── */ 
+.course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }  
+.course-card  { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; transition: var(--transition); box-shadow: var(--shadow); }
+.course-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); } 
+.course-card-banner { background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 24px 20px; }  
+.course-card-banner h3 { color: white; font-size: 16px; font-weight: 700; margin-bottom: 4px; } 
+.course-card-banner p  { color: rgba(255,255,255,.75); font-size: 13px; } 
 .course-card-body  { padding: 18px 20px; }
 .course-card-meta  { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; }
-.meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--gray); }
-.course-card-footer{ padding: 14px 20px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-
+.meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--gray); } 
+.course-card-footer{ padding: 14px 20px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between ; }  
+ 
 /* ── QUIZ TAKING ── */
-.quiz-wrap { max-width: 760px; margin: 0 auto; }
-.quiz-sticky-bar {
+.quiz-wrap { max-width: 760px; margin: 0 auto; } 
+.quiz-sticky-bar { 
     background: var(--white); border-radius: var(--radius); border: 1px solid var(--border);
-    padding: 16px 24px; margin-bottom: 20px;
-    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px; margin-bottom: 20px;   
+    display: flex; align-items: center; justify-content: space-between; 
     box-shadow: var(--shadow); position: sticky; top: calc(var(--topbar-height) + 12px); z-index: 40;
 }
 .timer { display: flex; align-items: center; gap: 8px; font-size: 24px; font-weight: 800; color: var(--primary); }
 .timer.warn { color: var(--warning); }
-.timer.urgent { color: var(--danger); animation: blink 1s infinite; }
+.timer.urgent { color: var(--danger); animation: blink 1s infinite; }  
 @keyframes blink { 50% { opacity: .4; } }
 .q-progress { font-size: 13px; color: var(--gray); }
 
-.question-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); padding: 28px; margin-bottom: 16px; box-shadow: var(--shadow-sm); }
-.question-num  { font-size: 12px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-.question-text { font-size: 16px; font-weight: 600; margin-bottom: 20px; line-height: 1.6; }
+.question-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); padding: 28px; margin-bottom: 16px; box-shadow: var(--shadow-sm); } 
+.question-num  { font-size: 12px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; } 
+.question-text { font-size: 16px; font-weight: 600; margin-bottom: 20px; line-height: 1.6; } 
 .question-pts  { font-size: 12px; color: var(--gray); float: right; margin-top: -28px; }
 .options-list  { display: flex; flex-direction: column; gap: 10px; list-style: none; }
 .option-item   { display: flex; align-items: center; gap: 12px; padding: 13px 18px; border: 2px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; transition: var(--transition); font-size: 14px; }

@@ -23,7 +23,7 @@ function fmtDuration($seconds) {
 <div class="card">
     <div class="card-header">
         <span class="card-title">
-            📋 Attempt History (<?= count($attempts) ?>)
+            📋 Attempt History (<?= count($attempts) ?>) 
         </span>
         <form method="GET" action="index.php" class="flex gap-2">
             <input type="hidden" name="page"   value="student">
@@ -57,7 +57,7 @@ function fmtDuration($seconds) {
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody> 
             <?php if (empty($attempts)): ?>
             <tr>
                 <td colspan="9" class="text-center text-muted"

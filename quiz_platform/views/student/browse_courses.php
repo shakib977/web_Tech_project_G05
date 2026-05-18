@@ -8,11 +8,11 @@ require 'views/layout/header.php';
 <div class="card" style="margin-bottom:20px">
     <div class="card-body">
         <form method="GET" action="index.php" id="browse_filter_form">
-            <input type="hidden" name="page"   value="student">
+            <input type="hidden" name="page"   value="student"> 
             <input type="hidden" name="action" value="browse_courses">
             <div class="flex gap-3 flex-wrap">
 
-                <!-- Search — auto-submit after 600ms typing pause -->
+                <!-- Search — auto-submit after 600ms typing pause --> 
                 <div style="flex:2;min-width:200px">
                     <input type="text" name="search" id="search_input"
                            class="form-control"
@@ -27,7 +27,7 @@ require 'views/layout/header.php';
                         <option value="">All Subjects</option>
                         <?php foreach ($subjects as $s): ?>
                         <option value="<?= $s['id'] ?>"
-                            <?= $subject_id==$s['id']?'selected':'' ?>>
+                            <?= $subject_id==$s['id']?'selected':'' ?>> 
                             <?= htmlspecialchars($s['name']) ?>
                         </option>
                         <?php endforeach; ?>
@@ -43,9 +43,9 @@ require 'views/layout/header.php';
                               color:<?= $enrolled_only?'var(--primary)':'var(--gray)' ?>">
                     <input type="checkbox" name="enrolled_only" value="1"
                            <?= $enrolled_only?'checked':'' ?>
-                           onchange="document.getElementById('browse_filter_form').submit()"
+                           onchange="document.getElementById('browse_filter_form').submit()" 
                            style="width:16px;height:16px;accent-color:var(--primary)">
-                    ✅ Enrolled 
+                    ✅ Enrolled  
                 </label>
 
                 <!-- Reset -->
@@ -53,43 +53,43 @@ require 'views/layout/header.php';
                    class="btn btn-secondary">Reset</a>
             </div>
         </form>
-    </div>
+    </div> 
 </div>
 
 <script>
 // Auto-submit search after user stops typing (600ms)
-var searchTimer;
+var searchTimer; 
 document.getElementById('search_input').addEventListener('input', function() {
     clearTimeout(searchTimer);
-    searchTimer = setTimeout(function() {
+    searchTimer = setTimeout(function() { 
         document.getElementById('browse_filter_form').submit();
     }, 600);
-});
+}); 
 </script>
-
+ 
 <!-- Results count -->
 <p class="text-sm text-muted" style="margin-bottom:16px">
     Showing <strong><?= count($courses) ?></strong> course<?= count($courses)!=1?'s':'' ?>
-    <?php if ($enrolled_only): ?>
-        <span style="background:#EEF2FF;color:var(--primary);
-                     padding:2px 10px;border-radius:20px;font-size:12px;
+    <?php if ($enrolled_only): ?> 
+        <span style="background:#EEF2FF;color:var(--primary); 
+                     padding:2px 10px;border-radius:20px;font-size:12px; 
                      font-weight:600;margin-left:8px">
             Enrolled only
-        </span>
+        </span> 
     <?php endif; ?>
 </p>
 
 <?php if (empty($courses)): ?>
     <div class="empty-state card" style="padding:60px">
         <div class="empty-icon">🔍</div>
-        <h3>No courses found</h3>
+        <h3>No courses found</h3> 
         <p>Try different filters or search terms.</p>
         <a href="index.php?page=student&action=browse_courses"
            class="btn btn-primary">Clear Filters</a>
     </div>
 <?php else: ?>
 <div class="course-grid">
-    <?php foreach ($courses as $c): ?>
+    <?php foreach ($courses as $c): ?>  
     <div class="course-card">
         <div class="course-card-banner">
             <h3><?= htmlspecialchars($c['title']) ?></h3>
