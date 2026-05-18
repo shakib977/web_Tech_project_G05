@@ -45,7 +45,7 @@ require 'views/layout/header.php';
                            <?= $enrolled_only?'checked':'' ?>
                            onchange="document.getElementById('browse_filter_form').submit()" 
                            style="width:16px;height:16px;accent-color:var(--primary)">
-                    ✅ Enrolled 
+                    ✅ Enrolled  
                 </label>
 
                 <!-- Reset -->
@@ -53,29 +53,29 @@ require 'views/layout/header.php';
                    class="btn btn-secondary">Reset</a>
             </div>
         </form>
-    </div>
+    </div> 
 </div>
 
 <script>
 // Auto-submit search after user stops typing (600ms)
-var searchTimer;
+var searchTimer; 
 document.getElementById('search_input').addEventListener('input', function() {
     clearTimeout(searchTimer);
-    searchTimer = setTimeout(function() {
+    searchTimer = setTimeout(function() { 
         document.getElementById('browse_filter_form').submit();
     }, 600);
-});
+}); 
 </script>
-
+ 
 <!-- Results count -->
 <p class="text-sm text-muted" style="margin-bottom:16px">
     Showing <strong><?= count($courses) ?></strong> course<?= count($courses)!=1?'s':'' ?>
-    <?php if ($enrolled_only): ?>
+    <?php if ($enrolled_only): ?> 
         <span style="background:#EEF2FF;color:var(--primary); 
                      padding:2px 10px;border-radius:20px;font-size:12px; 
                      font-weight:600;margin-left:8px">
             Enrolled only
-        </span>
+        </span> 
     <?php endif; ?>
 </p>
 
@@ -89,7 +89,7 @@ document.getElementById('search_input').addEventListener('input', function() {
     </div>
 <?php else: ?>
 <div class="course-grid">
-    <?php foreach ($courses as $c): ?> 
+    <?php foreach ($courses as $c): ?>  
     <div class="course-card">
         <div class="course-card-banner">
             <h3><?= htmlspecialchars($c['title']) ?></h3>
