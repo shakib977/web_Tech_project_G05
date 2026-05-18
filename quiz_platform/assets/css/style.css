@@ -241,7 +241,7 @@ tbody tr:hover { background: var(--light); }
 
 /* ── COURSE CARDS ── */
 .course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-.course-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; transition: var(--transition); box-shadow: var(--shadow); }
+.course-card  { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; transition: var(--transition); box-shadow: var(--shadow); }
 .course-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 .course-card-banner { background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 24px 20px; }
 .course-card-banner h3 { color: white; font-size: 16px; font-weight: 700; margin-bottom: 4px; }
