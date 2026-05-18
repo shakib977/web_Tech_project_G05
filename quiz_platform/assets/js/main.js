@@ -153,7 +153,7 @@ function loadLeaderboard(quizId, containerId) {
             return;
         }
         if (!data.data || data.data.length === 0) {
-            box.innerHTML = '<p class="text-center text-muted text-sm" style="padding:20px">No attempts yet for this quiz.</p>';
+            box.innerHTML = '<p class="text-center text-muted text-sm" style="padding:20px">No attempts yet for this quiz .</p>';
             return;
         }
 
