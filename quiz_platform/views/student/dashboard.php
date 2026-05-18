@@ -14,7 +14,7 @@ require 'views/layout/header.php';
     </div>
     <div class="stat-card">
         <div class="stat-icon icon-green">✏️</div>
-        <div class="stat-info"><h3><?= $total_attempts ?></h3><p>Quizzes Taken</p></div>
+        <div class="stat-info"><h3><?= $total_attempts ?></h3><p>Quizzes attempts</p></div>
     </div>
     <div class="stat-card">
         <div class="stat-icon icon-yellow">⭐</div>
@@ -60,7 +60,7 @@ require 'views/layout/header.php';
     <!-- Recent Attempts -->
     <div class="card">
         <div class="card-header">
-            <span class="card-title">🕒 Recent Attempts</span>
+            <span class="card-title">🕒 recent Attempts</span>
             <a href="index.php?page=student&action=attempt_history" class="btn btn-outline btn-sm">View All</a>
         </div>
         <div class="card-body" style="padding:0">
