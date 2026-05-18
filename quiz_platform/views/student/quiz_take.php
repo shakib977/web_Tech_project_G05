@@ -14,36 +14,36 @@ $end_ms = (time() + $time_remaining) * 1000;
             <div class="text-xs text-muted">
                 <?= htmlspecialchars($quiz['course_title']) ?>
             </div>
-        </div>
+        </div> 
         <div class="timer" id="timer_wrap">
             ⏱ <span id="timer_display">--:--</span>
-        </div>
+        </div> 
         <div class="q-progress">
             <span id="answered_count">0</span> / <?= count($questions) ?> answered
-        </div>
-    </div>
+        </div> 
+    </div> 
 
     <form method="POST"
           action="index.php?page=student&action=submit_quiz"
           id="quiz_form">
         <input type="hidden" name="attempt_id" value="<?= $attempt_id ?>">
-        <input type="hidden" name="quiz_id"    value="<?= $quiz['id'] ?>">
+        <input type="hidden" name="quiz_id"    value="<?= $quiz['id'] ?>"> 
 
         <?php foreach ($questions as $i => $q): ?>
-        <div class="question-card" id="qcard_<?= $q['id'] ?>">
+        <div class="question-card" id="qcard_<?= $q['id'] ?>"> 
             <div style="display:flex;justify-content:space-between;margin-bottom:8px">
                 <div class="question-num">
-                    Question <?= $i+1 ?> of <?= count($questions) ?>
+                    Question <?= $i+1 ?> of <?= count($questions) ?> 
                 </div>
                 <div class="text-xs text-muted">
                     <?= $q['marks'] ?> mark<?= $q['marks']!=1?'s':'' ?>
                 </div>
-            </div>
+            </div> 
             <div class="question-text">
                 <?= nl2br(htmlspecialchars($q['question_text'])) ?>
             </div>
             <ul class="options-list">
-                <?php foreach ($q['options'] as $opt): ?>
+                <?php foreach ($q['options'] as $opt): ?> 
                 <li class="option-item <?= $q['selected']==$opt['id']?'selected':'' ?>"
                     onclick="selectOption(this, '<?= $q['id'] ?>', <?= $opt['id'] ?>)">
                     <input type="radio"
