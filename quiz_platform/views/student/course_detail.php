@@ -245,33 +245,33 @@ require 'views/layout/header.php';
     </div>
 </div>
 
-<!-- Start Quiz Confirm Modal script -->
-<script>
+<!-- Start Quiz Confirm Modal script --> 
+<script> 
 function askStartQuiz(quizId, title, timeLimit, totalMarks) {
-    cconfirmShow({
+    cconfirmShow({ 
         icon:    '🚀',
         title:   'Start Quiz ',
         msg:     '"' + title + '"\n\nTime limit: ' + timeLimit + ' minutes\nTotal marks: ' + totalMarks + '\n\nThe timer will start immediately. Make sure you are ready!',
         okText:  'Start Now',
         okClass: 'btn-primary',
         onOk:    function() {
-            window.location.href =
+            window.location.href = 
                 'index.php?page=student&action=take_quiz&quiz_id=' + quizId;
         }
     });
-}
+} 
 
 function askDropCourse(courseId) {
     cconfirmShow({
         icon:    '⚠️',
-        title:   'Drop Course',
+        title:   'Drop Course', 
         msg:     'Are you sure you want to drop this course?\n\nThis cannot be undone if you have attempted any graded quiz.',
         okText:  'Drop Course',
         okClass: 'btn-danger',
         onOk:    function() {
             document.getElementById('drop_form').submit();
         }
-    });
+    }); 
 }
 </script>
 
