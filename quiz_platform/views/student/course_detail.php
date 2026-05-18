@@ -231,23 +231,23 @@ require 'views/layout/header.php';
         <!-- Q&A Link -->
         <div class="card">
             <div class="card-header"><span class="card-title">❓ Q&A Board</span></div>
-            <div class="card-body">
+            <div class="card-body"> 
                 <p class="text-sm text-gray" style="margin-bottom:14px">
                     Ask questions about this course.
                 </p>
                 <a href="index.php?page=student&action=qa_board&course_id=<?= $course['id'] ?>"
-                   class="btn btn-primary btn-full">
+                   class="btn btn-primary btn-full"> 
                     Open Q&A Board →
                 </a>
             </div>
         </div>
 
-    </div>
+    </div> 
 </div>
 
 <!-- Start Quiz Confirm Modal script --> 
 <script> 
-function askStartQuiz(quizId, title, timeLimit, totalMarks) {
+function askStartQuiz(quizId, title, timeLimit, totalMarks) { 
     cconfirmShow({ 
         icon:    '🚀',
         title:   'Start Quiz ',
@@ -255,22 +255,22 @@ function askStartQuiz(quizId, title, timeLimit, totalMarks) {
         okText:  'Start Now',
         okClass: 'btn-primary',
         onOk:    function() {
-            window.location.href = 
+            window.location.href =  
                 'index.php?page=student&action=take_quiz&quiz_id=' + quizId;
-        }
+        } 
     });
 } 
 
-function askDropCourse(courseId) {
+function askDropCourse(courseId) { 
     cconfirmShow({
         icon:    '⚠️',
-        title:   'Drop Course', 
+        title:   'Drop Course',  
         msg:     'Are you sure you want to drop this course?\n\nThis cannot be undone if you have attempted any graded quiz.',
         okText:  'Drop Course',
         okClass: 'btn-danger',
         onOk:    function() {
             document.getElementById('drop_form').submit();
-        }
+        } 
     }); 
 }
 </script>
