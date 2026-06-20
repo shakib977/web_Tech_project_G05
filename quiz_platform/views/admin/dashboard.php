@@ -1,10 +1,10 @@
 
-<?php
+<?php  
 // views/admin/dashboard.php — MEMBER 4
-require 'views/layout/header.php';
+require 'views/layout/header.php';  
 ?>
 
-<div class="stats-grid">
+<div class="stats-grid">  
     <div class="stat-card"><div class="stat-icon icon-blue">👨‍🎓</div><div class="stat-info"><h3><?= $role_counts['student'] ?? 0 ?></h3><p>Students</p></div></div>
     <div class="stat-card"><div class="stat-icon icon-purple">👨‍🏫</div><div class="stat-info"><h3><?= $role_counts['instructor'] ?? 0 ?></h3><p>Instructors</p></div></div>
     <div class="stat-card"><div class="stat-icon icon-green">📚</div><div class="stat-info"><h3><?= $active_courses ?></h3><p>Active Courses</p></div></div>
@@ -19,8 +19,8 @@ require 'views/layout/header.php';
                     Click to view →
                 </span>
             </p>
-        </div>
-    </div>
+        </div>  
+    </div> 
 </a>
 </div>
 
@@ -34,7 +34,7 @@ require 'views/layout/header.php';
             <div class="table-wrap">
             <table>
                 <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Joined</th></tr></thead>
-                <tbody>
+                <tbody>  
                 <?php foreach ($recent_users as $u): ?>
                 <tr>
                     <td class="fw-600"><?= htmlspecialchars($u['name']) ?></td>
@@ -53,26 +53,26 @@ require 'views/layout/header.php';
     <div class="card-header"><span class="card-title">⚡ Quick Actions</span></div>
     <div class="card-body" style="display:flex;flex-direction:column;gap:10px">
         <!-- Changed from "Manage Instructors" to "Create Instructor" -->
-        <a href="index.php?page=admin&action=create_instructor"
+        <a href="index.php?page=admin&action=create_instructor" 
            class="btn btn-primary">👨‍🏫 Create Instructor</a>
         <a href="index.php?page=admin&action=create_ta"
            class="btn btn-info">🎓 Create TA</a>
-        <a href="index.php?page=admin&action=integrity"
+        <a href="index.php?page=admin&action=integrity"  
            class="btn btn-warning">
             🔍 Review Flags
-            <?php if ($pending_flags): ?>
+            <?php if ($pending_flags): ?>  
                 <span class="badge badge-danger" style="margin-left:6px">
-                    <?= $pending_flags ?>
-                </span>
+                    <?= $pending_flags ?> 
+                </span> 
             <?php endif; ?>
         </a>
-        <a href="index.php?page=admin&action=analytics"
+        <a href="index.php?page=admin&action=analytics"   
            class="btn btn-secondary">📊 View Analytics</a>
         <a href="index.php?page=admin&action=settings"
            class="btn btn-secondary">⚙️ Platform Settings</a>
-    </div>
+    </div> 
 </div>
 </div>
 
-<?php require 'views/layout/footer.php'; ?>
-
+<?php require 'views/layout/footer.php'; ?>  
+// test contribution
