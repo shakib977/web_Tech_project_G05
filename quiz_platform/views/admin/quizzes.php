@@ -26,18 +26,18 @@
     </div>
     <div class="card-body" style="padding:0">
         <div class="table-wrap">
-        <table>
+        <table> 
             <thead><tr><th>Title</th><th>Course</th><th>Type</th><th>Marks</th><th>Pass</th><th>Attempts</th><th>Status</th><th>Available</th></tr></thead>
             <tbody>
             <?php if (empty($quizzes)): ?>
-            <tr><td colspan="8" class="text-center text-muted" style="padding:30px">No quizzes found.</td></tr>
+            <tr><td colspan="8" class="text-center text-muted" style="padding:30px">No quizzes foun d.</td></tr>
             <?php else: ?>
             <?php foreach ($quizzes as $q): ?>
             <tr>
                 <td class="fw-600 text-sm"><?= htmlspecialchars($q['title']) ?></td>
                 <td class="text-sm text-gray"><?= htmlspecialchars($q['course_title']) ?></td>
                 <td><span class="badge <?= $q['quiz_type']==='graded'?'badge-info':'badge-purple' ?>"><?= ucfirst($q['quiz_type']) ?></span></td>
-                <td><?= $q['total_marks'] ?></td>
+                <td><?= $q['total_marks'] ?></td> 
                 <td><?= $q['pass_mark'] ?></td>
                 <td><?= $q['attempt_count'] ?></td>
                 <td><span class="badge <?= $q['status']==='published'?'badge-success':'badge-warning' ?>"><?= ucfirst($q['status']) ?></span></td>
