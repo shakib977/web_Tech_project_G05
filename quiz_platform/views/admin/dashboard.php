@@ -32,7 +32,7 @@ require 'views/layout/header.php';
         </div>
         <div class="card-body" style="padding:0">
             <div class="table-wrap">
-            <table>
+            <table>  
                 <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Joined</th></tr></thead>
                 <tbody>  
                 <?php foreach ($recent_users as $u): ?>
@@ -41,12 +41,12 @@ require 'views/layout/header.php';
                     <td class="text-gray text-sm"><?= htmlspecialchars($u['email']) ?></td>
                     <td><span class="badge badge-<?= $u['role']==='admin'?'danger':($u['role']==='instructor'?'info':($u['role']==='ta'?'warning':'success')) ?>"><?= ucfirst($u['role']) ?></span></td>
                     <td class="text-sm text-muted"><?= date('M d', strtotime($u['created_at'])) ?></td>
-                </tr>
+                </tr> 
                 <?php endforeach; ?>
                 </tbody>
             </table>
             </div>
-        </div>
+        </div> 
     </div>
 
     <div class="card">
