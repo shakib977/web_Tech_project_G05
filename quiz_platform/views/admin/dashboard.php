@@ -66,7 +66,7 @@ require 'views/layout/header.php';
                 </span> 
             <?php endif; ?>
         </a>
-        <a href="index.php?page=admin&action=analytics"   
+        <a href="index.php?page=admin&action=analytics"      
            class="btn btn-secondary">📊 View Analytics</a>
         <a href="index.php?page=admin&action=settings"
            class="btn btn-secondary">⚙️ Platform Settings</a>
